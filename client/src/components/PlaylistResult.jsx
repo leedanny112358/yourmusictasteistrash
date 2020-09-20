@@ -118,7 +118,14 @@ class PlaylistResult extends Component {
         artist = this.state.similarArtists[i];
       followers = this.state.similarArtists[i].followers.total;
     }
-    this.setState({ leastFollowed: this.state.leastFollowed.concat(artist) });
+
+    let isDuplicate = this.state.leastFollowed.some(
+      (el) => el.name === artist.name
+    );
+
+    if (!isDuplicate) {
+      this.setState({ leastFollowed: this.state.leastFollowed.concat(artist) });
+    }
   }
 }
 
