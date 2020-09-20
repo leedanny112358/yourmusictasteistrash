@@ -6,7 +6,7 @@
  * For more information, read
  * https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow
  */
-
+var PORT = process.env.PORT || 8888;
 var express = require("express"); // Express web server framework
 var request = require("request"); // "Request" library
 var cors = require("cors");
@@ -15,7 +15,7 @@ var cookieParser = require("cookie-parser");
 
 var client_id = process.env.client_id; // Your client id
 var client_secret = process.env.client_secret; // Your secret
-var redirect_uri = process.env.redirect; // Your redirect uri
+var redirect_uri = process.env.redirect || "http://localhost:8888/callback/"; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
@@ -47,7 +47,8 @@ app.get("/login", function (req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = "user-read-private user-read-email user-top-read";
+  var scope =
+    "user-read-private user-read-email user-top-read playlist-read-private playlist-read-collaborative";
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
       querystring.stringify({
@@ -110,7 +111,7 @@ app.get("/callback", function (req, res) {
 
         // we can also pass the token to the browser to make requests from there
         res.redirect(
-          "http://localhost:3000/#" +
+          `${process.env.frontend}#` +
             querystring.stringify({
               access_token: access_token,
               refresh_token: refresh_token,
@@ -155,5 +156,4 @@ app.get("/refresh_token", function (req, res) {
   });
 });
 
-console.log("Listening on 8888");
-app.listen(8888);
+app.listen(PORT);

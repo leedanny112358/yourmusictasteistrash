@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import Header from "./components/Header.jsx";
-import Result from "./components/Result.jsx";
+import TopResult from "./components/TopResult.jsx";
+import PlaylistResult from "./components/PlaylistResult.jsx";
 import SpotifyWebApi from "spotify-web-api-js";
 const spotifyApi = new SpotifyWebApi();
 
@@ -17,22 +18,27 @@ class App extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    //Gets rid of access token in the url hash parameters//
-    window.location.hash = "";
-    window.history.pushState(null, "", window.location.href.replace("#", ""));
-  }
-
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <Header />
-          <div className="App">
-            <a href="http://localhost:8888/login"> Login to Spotify </a>
-            <Result />
-          </div>
-        </header>
+      <div>
+        <Header />
+        <div>
+          <button
+            onClick={() => {
+              window.location = window.location.href.includes("localhost")
+                ? "http://localhost:8888/login"
+                : "https://ymtit.herokuapp.com/login";
+            }}
+            style={{
+              padding: "20px",
+              "font-size": "20px",
+              "margin-top": "20px",
+            }}
+          >
+            Sign in with Spotify
+          </button>
+          <PlaylistResult />
+        </div>
       </div>
     );
   }
