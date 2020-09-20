@@ -7,6 +7,8 @@ class PlaylistResult extends Component {
     spotifyPlaylists: [],
     similarArtists: [],
     leastFollowed: [],
+    artistsTopTracks: [],
+    update: "",
   };
 
   componentDidMount() {
@@ -56,6 +58,14 @@ class PlaylistResult extends Component {
         <div className="row">
           <div>{playlists}</div>
           <div>{recommendations}</div>
+          <button
+            onClick={() => {
+              this.makePlaylist();
+            }}
+          >
+            make a playlist with these artists
+          </button>
+          <h2>{this.state.update}</h2>
         </div>
       </div>
     );
@@ -95,7 +105,6 @@ class PlaylistResult extends Component {
           this.getSimilarArtists(artists[i][0].id);
         }
       }
-      console.log(this.state.leastFollowed);
     });
   }
 
@@ -124,8 +133,40 @@ class PlaylistResult extends Component {
     );
 
     if (!isDuplicate) {
-      this.setState({ leastFollowed: this.state.leastFollowed.concat(artist) });
+      this.setState(
+        { leastFollowed: this.state.leastFollowed.concat(artist) },
+        () => {
+          spotifyApi.getArtistTopTracks(artist.id, "US").then((response) => {
+            this.setState({
+              artistsTopTracks: this.state.artistsTopTracks.concat(
+                response.tracks[0].uri
+              ),
+            });
+          });
+        }
+      );
     }
+  }
+
+  makePlaylist() {
+    spotifyApi.getMe().then((response) => {
+      spotifyApi
+        .createPlaylist(response.id, {
+          name: "The New Playlist",
+          public: false,
+        })
+        .then((response) => {
+          this.setState({
+            update:
+              "Your playlist is know available at: " +
+              response.external_urls.spotify,
+          });
+          spotifyApi.addTracksToPlaylist(
+            response.id,
+            this.state.artistsTopTracks
+          );
+        });
+    });
   }
 }
 
