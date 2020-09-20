@@ -3,17 +3,14 @@ import SpotifyWebApi from "spotify-web-api-js";
 const spotifyApi = new SpotifyWebApi();
 
 class Result extends Component {
-  constructor() {
-    super();
-  }
   state = {
     spotifyRes: [],
     similarArtists: [],
+    leastFollowed: [],
   };
 
   componentDidMount() {
     this.getUsersTopArtists();
-    this.getSimilarArtists();
   }
 
   getUsersTopArtists() {
@@ -21,22 +18,23 @@ class Result extends Component {
       const results = response.items.map((result) => {
         return result;
       });
-      this.setState({ spotifyRes: results });
+      this.setState({ spotifyRes: results }, () => {
+        for (let i = 0; i < this.state.spotifyRes.length; i++) {
+          this.getSimilarArtists(this.state.spotifyRes[i].id);
+        }
+      });
     });
   }
 
-  getSimilarArtists() {
-    spotifyApi
-      .getArtistRelatedArtists("6yJ6QQ3Y5l0s0tn7b0arrO")
-      .then((response) => {
-        const relatedArtists = response.artists.map((result) => {
-          return result;
-        });
-        this.setState({ similarArtists: relatedArtists }, () => {
-          this.getLeastFollowedArtist();
-        });
-        //console.log(this.state.similarArtists);
+  getSimilarArtists(artistId) {
+    spotifyApi.getArtistRelatedArtists(artistId).then((response) => {
+      const relatedArtists = response.artists.map((result) => {
+        return result;
       });
+      this.setState({ similarArtists: relatedArtists }, () => {
+        this.getLeastFollowedArtist();
+      });
+    });
   }
 
   getLeastFollowedArtist() {
@@ -44,36 +42,50 @@ class Result extends Component {
     let followers = 999999999;
     for (let i = 0; i < this.state.similarArtists.length; i++) {
       if (followers > this.state.similarArtists[i].followers.total)
-        artist = this.state.similarArtists[i].name;
+        artist = this.state.similarArtists[i];
+      followers = this.state.similarArtists[i].followers.total;
     }
     console.log(artist);
-    //return artist;
+    this.setState({ leastFollowed: this.state.leastFollowed.concat(artist) });
+    console.log(this.state.leastFollowed);
   }
 
   render() {
-    const results = this.state.spotifyRes.map((result) => {
+    const mostListenedTo = this.state.spotifyRes.map((result) => {
       return (
-        <div className="row">
+        <div>
           <div>
             <img
               src={result["images"][0].url}
               alt={result["name"]}
               style={{ width: 150 }}
             />
-            <h2 style={{ width: 150 }}>{result["name"]}</h2>
-          </div>
-          <div>
-            <img
-              src={result["images"][0].url}
-              alt={result["name"]}
-              style={{ width: 150 }}
-            />
-            <h2 style={{ width: 150 }}>{result["name"]}</h2>
+            <h2>{result["name"]}</h2>
           </div>
         </div>
       );
     });
-    return results;
+
+    const leastListenedTo = this.state.leastFollowed.map((result) => {
+      return (
+        <div>
+          <div>
+            <img
+              src={result["images"][0].url}
+              alt={result["name"]}
+              style={{ width: 150 }}
+            />
+            <h2>{result["name"]}</h2>
+          </div>
+        </div>
+      );
+    });
+    return (
+      <div className="row">
+        <div>{mostListenedTo}</div>
+        <div>{leastListenedTo}</div>
+      </div>
+    );
   }
 }
 
