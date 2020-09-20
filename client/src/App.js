@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Header from "./components/Header.jsx";
+import Result from "./components/Result.jsx";
 import SpotifyWebApi from "spotify-web-api-js";
 const spotifyApi = new SpotifyWebApi();
 
@@ -13,10 +14,7 @@ class App extends Component {
     if (accessToken) {
       spotifyApi.setAccessToken(accessToken);
     }
-    this.state = {
-      accessToken: accessToken,
-      refreshToken: refreshToken,
-    };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -32,8 +30,7 @@ class App extends Component {
           <Header />
           <div className="App">
             <a href="http://localhost:8888/login"> Login to Spotify </a>
-            <h1>{this.state.accessToken}</h1>
-            <h1>{this.state.refreshToken}</h1>
+            <Result />
           </div>
         </header>
       </div>
