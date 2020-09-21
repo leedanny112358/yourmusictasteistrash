@@ -113,9 +113,11 @@ class PlaylistResult extends Component {
       const relatedArtists = response.artists.map((result) => {
         return result;
       });
-      this.setState({ similarArtists: relatedArtists }, () => {
-        this.getLeastFollowedArtist();
-      });
+      if (relatedArtists.length > 0) {
+        this.setState({ similarArtists: relatedArtists }, () => {
+          this.getLeastFollowedArtist();
+        });
+      }
     });
   }
 
