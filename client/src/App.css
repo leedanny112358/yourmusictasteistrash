@@ -1,3 +1,29 @@
+h1 {
+  font-size: 72px;
+  margin: 0;
+}
+
+body {
+  font-family: "Zilla Slab", serif;
+}
+
+.header {
+  margin-bottom: 50px;
+}
+
+.btn {
+  background-color: #00d95f;
+  color: white;
+  text-align: center;
+  border-radius: 12px;
+  text-decoration: none;
+  border: none;
+  padding: 10px;
+  margin: 0 50px 0 10px;
+  position: relative;
+  bottom: 10px;
+}
+
 .row {
   display: flex;
   flex-direction: row;
