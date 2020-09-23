@@ -14,32 +14,39 @@ class LandingPage extends Component {
           <div>
             <img src={Shoes} alt="trashshoes" />
             <img src={Shirt} alt="trashshirt" />
+            <img src={Album} alt="trashalbum" />
           </div>
         </div>
         <h2>“yO lEt mE pUt oN sOmE mUsIc U aIn’T nEvEr hEaRd bEfOrE.” - you</h2>
         <div>
-          <p>
-            hey you. yeah you. your music fucking sucks stop saying you listen
-            to “underground artists” when you got trash ass, basic ass, camp
-            flog gnaw lookin ass playlists.{" "}
-          </p>
+          <div className="content">
+            <p>hey you. yeah you. </p>
+            <p>
+              <b>your music fucking sucks.</b>
+            </p>
+            <p>
+              stop saying you listen to “underground artists” when you got trash
+              ass, basic ass, camp flog gnaw lookin ass playlists.
+            </p>
+            <div className="login">
+              <img src={Spotify} alt="spotify icon" />
+              <button
+                onClick={() => {
+                  window.location = window.location.href.includes("localhost")
+                    ? "http://localhost:8888/login"
+                    : "https://ymtit.herokuapp.com/login";
+                }}
+                className="btn"
+              >
+                Sign in with Spotify
+              </button>
+            </div>
+            <p>
+              but it’s ok, we’ll make you a playlist with similar, smaller
+              artists based on a (shit) playlist you already have
+            </p>
+          </div>
         </div>
-        <img src={Spotify} alt="spotify icon" />
-        <button
-          onClick={() => {
-            window.location = window.location.href.includes("localhost")
-              ? "http://localhost:8888/login"
-              : "https://ymtit.herokuapp.com/login";
-          }}
-          className="btn"
-        >
-          Sign in with Spotify
-        </button>
-        <img src={Album} alt="trashalbum" />
-        <p>
-          but it’s ok, we’ll make you a playlist with similar, smaller artists
-          based on a (shit) playlist you already have
-        </p>
       </div>
     );
   }

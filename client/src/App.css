@@ -1,6 +1,12 @@
 h1 {
   font-size: 72px;
-  margin: 0;
+  margin: 0 0 0 10px;
+  padding: 0px;
+}
+
+h2 {
+  margin-top: 50px;
+  text-align: center;
 }
 
 body {
@@ -8,7 +14,13 @@ body {
 }
 
 .header {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
+}
+
+.login {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .btn {
@@ -16,16 +28,53 @@ body {
   color: white;
   text-align: center;
   border-radius: 12px;
-  text-decoration: none;
   border: none;
-  padding: 10px;
+  padding: 0.7em;
   margin: 0 50px 0 10px;
-  position: relative;
-  bottom: 10px;
+}
+
+.playlistbtn {
+  width: auto;
+  text-align: center;
+  margin: 20px 0px 20px;
+}
+
+.playlist {
+  background-color: white;
+  border: none;
 }
 
 .row {
   display: flex;
   flex-direction: row;
   height: 400px;
+}
+
+.content {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.playlistname {
+  margin-top: 10px;
+  font-family: "Zilla Slab", serif;
+}
+
+.loader {
+  display: none;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid black; /* Black*/
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

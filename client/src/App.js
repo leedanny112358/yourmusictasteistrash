@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import LandingPage from "./components/LandingPage.jsx";
 import TopResult from "./components/TopResult.jsx";
@@ -20,11 +21,10 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <LandingPage />
-        </div>
-      </div>
+      <Switch>
+        <Route path="/" component={LandingPage} exact />
+        <Route path="/playlists" component={PlaylistResult} exact />
+      </Switch>
     );
   }
 
