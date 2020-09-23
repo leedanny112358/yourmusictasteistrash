@@ -52,7 +52,7 @@ class PlaylistResult extends Component {
         <div className="row" id="hide">
           <div className="content">{playlists}</div>
         </div>
-        <p>version 0.8.1</p>
+        <p>version 0.8.3</p>
       </div>
     );
   }
@@ -86,7 +86,7 @@ class PlaylistResult extends Component {
       const artists = response.items.map((result) => {
         return result.track.artists;
       });
-      for (let i = 0; i < artists.length; i++) {
+      for (let i = 0; i < 25; i++) {
         if (artists[i].length > 1) {
           for (let feat = 0; feat < artists[i].length; feat++) {
             this.getSimilarArtists(artists[i][feat].id);
@@ -168,6 +168,7 @@ class PlaylistResult extends Component {
               this.setState({
                 status: true,
               });
+              console.log(response);
             });
         });
     });
