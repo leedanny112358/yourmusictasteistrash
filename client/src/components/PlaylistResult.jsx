@@ -16,10 +16,13 @@ class PlaylistResult extends Component {
     this.getUsersPlaylists();
   }
 
-  render() {
+  componentDidUpdate() {
     if (this.state.status == true) {
-      window.location.href = this.state.update;
+      console.log(this.state.update);
     }
+  }
+
+  render() {
     const playlists = this.state.spotifyPlaylists.map((result) => {
       return (
         <div className="playlistbtn">
@@ -49,6 +52,9 @@ class PlaylistResult extends Component {
       <div>
         <h1>Pick a playlist to make better</h1>
         <div className="loader" id="show"></div>
+        <a href={this.state.update} id="show">
+          go to playlist
+        </a>
         <div className="row" id="hide">
           <div className="content">{playlists}</div>
         </div>
@@ -86,7 +92,7 @@ class PlaylistResult extends Component {
       const artists = response.items.map((result) => {
         return result.track.artists;
       });
-      for (let i = 0; i < 25; i++) {
+      for (let i = 0; i < artists.length && i < 25; i++) {
         if (artists[i].length > 1) {
           for (let feat = 0; feat < artists[i].length; feat++) {
             this.getSimilarArtists(artists[i][feat].id);
@@ -162,13 +168,13 @@ class PlaylistResult extends Component {
           this.setState({
             update: response.external_urls.spotify,
           });
+          console.log(response);
           spotifyApi
             .addTracksToPlaylist(response.id, this.state.artistsTopTracks)
             .then((response) => {
               this.setState({
                 status: true,
               });
-              console.log(response);
             });
         });
     });

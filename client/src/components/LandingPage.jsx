@@ -1,20 +1,39 @@
 import React, { Component } from "react";
-import Shoes from "./assets/trashshoes.png";
-import Shirt from "./assets/trashshirt.png";
-import Album from "./assets/trashalbum.png";
+import Shoes from "./assets/img1.png";
+import Shirt from "./assets/img2.png";
+import Album from "./assets/img3.png";
 import Spotify from "./assets/spotify.png";
 
 class LandingPage extends Component {
-  state = {};
+  state = {
+    imageCount: 0,
+  };
+
+  componentDidMount() {
+    this.pictureChanger();
+    this.interval = setInterval(this.pictureChanger(), 3000);
+  }
+
+  pictureChanger() {
+    let images = [Shoes, Album, Shirt];
+    let x = this.state.imageCount;
+    let img = document.getElementById("img");
+    img.src = images[x];
+    x++;
+    if (x >= images.length) {
+      x = 0;
+    }
+  }
+
   render() {
     return (
       <div>
         <div className="row header">
           <h1>your music taste is trash</h1>
           <div>
-            <img src={Shoes} alt="trashshoes" />
-            <img src={Shirt} alt="trashshirt" />
-            <img src={Album} alt="trashalbum" />
+            <img id="img" src={Shoes} alt="trashshoes" />
+            {/*             <img id="img" src={Shirt} alt="trashshirt" />
+            <img id="img" src={Album} alt="trashalbum" /> */}
           </div>
         </div>
         <h2>“yO lEt mE pUt oN sOmE mUsIc U aIn’T nEvEr hEaRd bEfOrE.” - you</h2>
@@ -47,6 +66,7 @@ class LandingPage extends Component {
             </p>
           </div>
         </div>
+        <script></script>
       </div>
     );
   }
