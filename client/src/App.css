@@ -1,5 +1,5 @@
 h1 {
-  font-size: 72px;
+  font-size: 70px;
   margin: 0 0 0 10px;
 }
 
@@ -62,9 +62,20 @@ body {
   margin: 0 auto;
 }
 
+.playlistcontainer {
+  width: 400px;
+}
+
 .playlistname {
   margin-top: 10px;
   font-family: "Zilla Slab", serif;
+  font-size: 24px;
+  text-align: center;
+}
+
+.playlistimg {
+  width: 200px;
+  height: auto;
 }
 
 .spotify {
@@ -82,6 +93,27 @@ body {
   animation: spin 2s linear infinite;
 }
 
+.center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.redirect {
+  display: none;
+  background-color: #00d95f;
+  color: white;
+  text-align: center;
+  width: 10em;
+  text-decoration: none;
+  font-family: "Zilla Slab", serif;
+  font-size: 1em;
+  border-radius: 12px;
+  border: none;
+  padding: 0.5em;
+  margin-top: 20px;
+}
+
 @media only screen and (min-width: 560px) {
   h1 {
     font-size: 90px;
@@ -89,11 +121,27 @@ body {
   .content {
     font-size: 21px;
   }
+
+  .playlistimg {
+    width: 250px;
+  }
+
+  .playlistname {
+    font-size: 30px;
+  }
 }
 
 @media only screen and (min-width: 714px) {
   .content {
     font-size: 27px;
+  }
+
+  .playlistimg {
+    width: 275px;
+  }
+
+  .playlistname {
+    font-size: 40px;
   }
 }
 

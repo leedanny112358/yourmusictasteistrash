@@ -19,6 +19,7 @@ class PlaylistResult extends Component {
   componentDidUpdate() {
     if (this.state.status == true) {
       console.log(this.state.update);
+      this.showRedirect();
     }
   }
 
@@ -33,13 +34,13 @@ class PlaylistResult extends Component {
               this.hide();
             }}
           >
-            <div>
+            <div className="playlistcontainer">
               <img
                 src={
                   result["images"].length < 1 ? "#" : result["images"][0].url
                 }
                 alt={result["name"]}
-                style={{ height: 150 }}
+                className="playlistimg"
               />
               <h2 className="playlistname">{result["name"]}</h2>
             </div>
@@ -50,15 +51,21 @@ class PlaylistResult extends Component {
 
     return (
       <div>
-        <h1>Pick a playlist to make better</h1>
-        <div className="loader" id="show"></div>
-        <a href={this.state.update} id="show">
-          go to playlist
-        </a>
-        <div className="row" id="hide">
-          <div className="content">{playlists}</div>
+        <div className="header">
+          <h1>Pick a playlist to make better</h1>
         </div>
-        <p>version 0.8.3</p>
+        <div className="content">
+          <div className="center">
+            <div className="loader" id="show"></div>
+            <a href={this.state.update} className="redirect" id="redirect">
+              go to new playlist
+            </a>
+          </div>
+          <div className="row" id="hide">
+            <div className="content">{playlists}</div>
+          </div>
+          <p>version 0.9.1</p>
+        </div>
       </div>
     );
   }
@@ -186,6 +193,11 @@ class PlaylistResult extends Component {
     let shown = document.getElementById("show");
     hidden.style.display = "none";
     shown.style.display = "block";
+  }
+
+  showRedirect() {
+    let redirect = document.getElementById("redirect");
+    redirect.style.display = "block";
   }
 }
 
