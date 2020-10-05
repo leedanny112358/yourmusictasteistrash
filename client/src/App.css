@@ -13,13 +13,14 @@ body {
 }
 
 .header {
-  margin-bottom: 20px;
-}
-
-.cdg {
-  width: 50vw;
-  height: 50vw;
-  transform: scaleX(-1);
+  background: linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0) 1%,
+      rgba(255, 255, 255, 1)
+    ),
+    url(components/assets/bkg1.png);
+  width: auto;
+  height: 325px;
 }
 
 .login {
@@ -54,7 +55,6 @@ body {
 .row {
   display: flex;
   flex-direction: row;
-  height: 400px;
 }
 
 .content {

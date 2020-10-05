@@ -8,8 +8,8 @@ class LandingPage extends Component {
       <div>
         <div className="header">
           <h1>your music taste is trash</h1>
-          <img src={Cdg} alt="cdg" className="cdg" />
         </div>
+        <div className="cdg"></div>
         <h2>“yO lEt mE pUt oN sOmE mUsIc U aIn’T nEvEr hEaRd bEfOrE.” - you</h2>
         <div>
           <div className="content">
