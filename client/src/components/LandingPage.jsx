@@ -10,9 +10,11 @@ class LandingPage extends Component {
           <h1>your music taste is trash</h1>
         </div>
         <div className="cdg"></div>
-        <h2>“yO lEt mE pUt oN sOmE mUsIc U aIn’T nEvEr hEaRd bEfOrE.” - you</h2>
         <div>
           <div className="content">
+            <h2>
+              “yO lEt mE pUt oN sOmE mUsIc U aIn’T nEvEr hEaRd bEfOrE.” - you
+            </h2>
             <p>hey you. yeah you. </p>
             <p>
               <b>your music fucking sucks.</b>
@@ -22,7 +24,7 @@ class LandingPage extends Component {
               ass, basic ass, camp flog gnaw lookin ass playlists.
             </p>
             <div className="login">
-              <img src={Spotify} alt="spotify icon" />
+              <img src={Spotify} alt="spotify icon" className="spotify" />
               <button
                 onClick={() => {
                   window.location = window.location.href.includes("localhost")
