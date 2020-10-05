@@ -56,7 +56,7 @@ class PlaylistResult extends Component {
         </div>
         <div className="content">
           <div className="center">
-            <div className="loader" id="show"></div>
+            <div className="loader" id="loader"></div>
             <a href={this.state.update} className="redirect" id="redirect">
               go to new playlist
             </a>
@@ -64,7 +64,7 @@ class PlaylistResult extends Component {
           <div className="row" id="hide">
             <div className="content">{playlists}</div>
           </div>
-          <p>version 0.9.1</p>
+          <p>version 1.0</p>
         </div>
       </div>
     );
@@ -190,13 +190,15 @@ class PlaylistResult extends Component {
 
   hide() {
     let hidden = document.getElementById("hide");
-    let shown = document.getElementById("show");
+    let shown = document.getElementById("loader");
     hidden.style.display = "none";
     shown.style.display = "block";
   }
 
   showRedirect() {
     let redirect = document.getElementById("redirect");
+    let loader = document.getElementById("loader");
+    loader.style.display = "none";
     redirect.style.display = "block";
   }
 }

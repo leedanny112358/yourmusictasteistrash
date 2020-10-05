@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Spotify from "./assets/spotify.png";
-import Cdg from "./assets/cdg.png";
 
 class LandingPage extends Component {
   render() {
